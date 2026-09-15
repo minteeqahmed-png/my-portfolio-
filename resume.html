@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <title>Minteeq Ahmed — Professional Resume | AI Engineer & Data Scientist</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:italic@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #090a0f;
+      --panel-bg: rgba(18, 20, 29, 0.92);
+      --accent-red: #ff3b4b;
+      --accent-red-glow: rgba(255, 59, 75, 0.4);
+      --text-white: #ffffff;
+      --text-muted: #cbd5e1;
+      --text-dim: #94a3b8;
+      --glass-border: rgba(255, 59, 75, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    img {
+      image-rendering: -webkit-optimize-contrast;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: var(--text-sm);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Glow Background */
+    .ambient-glow {
+      position: fixed;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(255, 59, 75, 0.15) 0%, transparent 70%);
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Action Bar (Print / Back) */
+    .resume-nav {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      z-index: 10;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 22px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      color: var(--text-white);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .btn-action:hover {
+      background: var(--accent-red);
+      border-color: var(--accent-red);
+      box-shadow: 0 0 20px var(--accent-red-glow);
+      transform: translateY(-2px);
+    }
+
+    /* Resume Container matching Image 1 Design */
+    .resume-wrapper {
+      width: 100%;
+      max-width: 1100px;
+      background: var(--panel-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 59, 75, 0.15);
+      backdrop-filter: blur(20px);
+      padding: 50px;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 50px;
+      position: relative;
+      z-index: 5;
+    }
+
+    /* Left Column */
+    .left-col {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* Photo Frame with Cyber Red Target Corners */
+    .photo-container {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 59, 75, 0.3);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+    }
+
+    .photo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    /* Red Target Corner Crosshairs */
+    .corner-target {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--accent-red);
+      z-index: 3;
+    }
+
+    .corner-tl { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+    .corner-tr { top: 12px; right: 12px; border-left: none; border-bottom: none; }
+    .corner-bl { bottom: 12px; left: 12px; border-right: none; border-top: none; }
+    .corner-br { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+
+    /* Header Name & Title */
+    .header-block {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .greeting-text {
+      font-size: var(--text-xl);
+      color: #94a3b8;
+      font-weight: 300;
+    }
+
+    .name-main {
+      font-family: 'Syne', sans-serif;
+      font-size: var(--text-4xl);
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+
+    .name-main span {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      color: var(--accent-red);
+      font-weight: 400;
+      text-transform: none;
+    }
+
+    .role-badge-subtitle {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-red);
+      margin-top: 4px;
+    }
+
+    /* Red Section Header Badge (Image 1 Style) */
+    .badge-section-header {
+      display: inline-block;
+      background: var(--accent-red);
+      color: #ffffff;
+      font-family: 'Syne', sans-serif;
+      font-size: var(--text-xs);
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      width: fit-content;
+      box-shadow: 0 4px 14px var(--accent-red-glow);
+    }
+
+    .section-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .body-text {
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* Education Item */
+    .edu-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .edu-degree {
+      font-weight: 700;
+      font-size: var(--text-sm);
+      color: var(--text-white);
+    }
+
+    .edu-institution {
+      font-size: var(--text-xs);
+      color: var(--accent-red);
+      font-weight: 600;
+    }
+
+    .edu-location {
+      font-size: var(--text-xs);
+      color: var(--text-dim);
+    }
+
+    /* Contact Details */
+    .contact-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .contact-line:hover {
+      color: var(--text-white);
+    }
+
+    /* 3D Interactive Icon Badges Base System */
+    .icon-3d-wrapper {
+      position: relative;
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 600px;
+      transform-style: preserve-3d;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      overflow: hidden;
+      color: #ffffff;
+    }
+
+    .icon-3d-wrapper::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .icon-3d-svg {
+      filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.7));
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-line:hover .icon-3d-wrapper,
+    .contact-item:hover .icon-3d-wrapper,
+    .icon-3d-wrapper:hover {
+      transform: translateY(-5px) rotateX(15deg) rotateY(-15deg) scale(1.18);
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 12px 40px rgba(229, 43, 56, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .contact-line:hover .icon-3d-svg,
+    .contact-item:hover .icon-3d-svg,
+    .icon-3d-wrapper:hover .icon-3d-svg {
+      transform: translateZ(12px) scale(1.12);
+    }
+
+    /* Right Column */
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    /* Timeline Items (Experience & Projects) */
+    .timeline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .timeline-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 2px solid var(--accent-red);
+      padding: 14px 18px;
+      border-radius: 0 12px 12px 0;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .timeline-item:hover {
+      background: rgba(255, 59, 75, 0.08);
+      transform: translateX(4px);
+    }
+
+    .item-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .item-title {
+      font-weight: 800;
+      font-size: var(--text-sm);
+      color: var(--text-white);
+      letter-spacing: 0.02em;
+    }
+
+    .item-date {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: var(--accent-red);
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+
+    .item-company {
+      font-size: var(--text-xs);
+      color: var(--text-dim);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .item-desc {
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .bullet-list {
+      margin-left: 18px;
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .bullet-list li {
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+    }
+
+    /* Skills Pill Grid */
+    .skills-category-group {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .skill-cat-title {
+      font-size: var(--text-xs);
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #e2e8f0;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 6px;
+      transition: all 0.3s;
+    }
+
+    .tag-pill:hover {
+      background: rgba(255, 59, 75, 0.18);
+      border-color: var(--accent-red);
+      color: #ffffff;
+    }
+
+    .tag-pill-highlight {
+      background: rgba(255, 59, 75, 0.14);
+      border: 1px solid rgba(255, 59, 75, 0.4);
+      color: #ffffff;
+    }
+
+    /* Certifications List */
+    .cert-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .cert-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 12px 16px;
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+
+    .cert-card:hover {
+      border-color: var(--accent-red);
+      background: rgba(255, 59, 75, 0.06);
+    }
+
+    .cert-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .cert-name {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: var(--text-white);
+    }
+
+    .cert-issuer {
+      font-size: var(--text-xs);
+      color: var(--text-dim);
+    }
+
+    .cert-badge {
+      font-size: var(--text-xs);
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: var(--accent-red);
+      background: rgba(255, 59, 75, 0.12);
+      padding: 4px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .resume-wrapper {
+        grid-template-columns: 1fr;
+        padding: 30px 20px;
+        gap: 40px;
+      }
+      .photo-container {
+        height: 340px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        height: auto;
+        padding: 16px;
+        gap: 12px;
+      }
+      .nav-links {
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .status-badge {
+        display: none;
+      }
+      .name-main {
+        font-size: var(--text-3xl);
+      }
+      .resume-wrapper {
+        padding: 20px 16px;
+        gap: 32px;
+      }
+      .photo-container {
+        height: 280px;
+      }
+      .contact-group {
+        flex-direction: column;
+      }
+      .contact-line {
+        margin-left: 0;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding: 0;
+      }
+      .resume-wrapper {
+        background: #ffffff !important;
+        color: #000000 !important;
+        box-shadow: none !important;
+        border: none !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        grid-template-columns: 300px 1fr !important;
+      }
+      .badge-section-header {
+        background: #000000 !important;
+        color: #ffffff !important;
+      }
+      .resume-nav, .ambient-glow {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+
+  <!-- Navigation / Print Controls -->
+  <div class="resume-nav">
+    <a href="index.html" class="btn-action">⟵ Back to Portfolio</a>
+    <button onclick="window.print()" class="btn-action">🖨️ Print / Download PDF</button>
+  </div>
+
+  <!-- Resume Layout Container -->
+  <div class="resume-wrapper">
+
+    <!-- LEFT COLUMN -->
+    <div class="left-col">
+
+      <!-- Portrait Frame with Corner Target Crosshairs -->
+      <div class="photo-container">
+        <div class="corner-target corner-tl"></div>
+        <div class="corner-target corner-tr"></div>
+        <div class="corner-target corner-bl"></div>
+        <div class="corner-target corner-br"></div>
+        <img src="./assets/minteeq_portrait.jpg" alt="Minteeq Ahmed Portrait">
+      </div>
+
+      <!-- Header Name & Title -->
+      <div class="header-block">
+        <div class="greeting-text">Hello,</div>
+        <h1 class="name-main">I'm <span>Minteeq</span> Ahmed</h1>
+        <div class="role-badge-subtitle">Aspiring Data Scientist & AI Engineer</div>
+      </div>
+
+      <!-- ABOUT ME SECTION -->
+      <div class="section-block">
+        <div class="badge-section-header">ABOUT ME</div>
+        <p class="body-text">
+          Computer Science student with hands-on experience building automated data pipelines, web scrapers, and AI-driven workflows. Strong foundation in Python, C++, and low-level systems, complemented by a growing portfolio of Google Cloud and generative AI certifications (Vertex AI, RAG, prompt design).
+        </p>
+      </div>
+
+      <!-- EDUCATION SECTION -->
+      <div class="section-block">
+        <div class="badge-section-header">EDUCATION</div>
+        <div class="edu-item">
+          <div class="edu-degree">BS Computer Science — In Progress</div>
+          <div class="edu-institution">University of Central Punjab (UCP)</div>
+          <div class="edu-location">Sialkot, Punjab, Pakistan • Present</div>
+        </div>
+      </div>
+
+      <!-- CONTACT SECTION -->
+      <div class="section-block">
+        <div class="badge-section-header">CONTACT</div>
+        <div class="contact-group">
+          <a href="tel:03211823411" class="contact-line">
+            <div class="icon-3d-wrapper">
+              <svg class="icon-3d-svg" viewBox="0 0 24 24" width="18" height="18">
+                <defs>
+                  <linearGradient id="phoneGradR" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="50%" stop-color="#ff6b7a"/>
+                    <stop offset="100%" stop-color="#d91024"/>
+                  </linearGradient>
+                </defs>
+                <path fill="url(#phoneGradR)" d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1.003 1.003 0 011.02-.24c1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+            </div>
+            <span>+92 321 1823411</span>
+          </a>
+          <a href="mailto:minteeqahmed@gmail.com" class="contact-line">
+            <div class="icon-3d-wrapper">
+              <svg class="icon-3d-svg" viewBox="0 0 24 24" width="18" height="18">
+                <defs>
+                  <linearGradient id="mailGradR" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="60%" stop-color="#ff5e6e"/>
+                    <stop offset="100%" stop-color="#c4081b"/>
+                  </linearGradient>
+                </defs>
+                <path fill="url(#mailGradR)" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </div>
+            <span>minteeqahmed@gmail.com</span>
+          </a>
+          <div class="contact-line">
+            <div class="icon-3d-wrapper">
+              <svg class="icon-3d-svg" viewBox="0 0 24 24" width="18" height="18">
+                <defs>
+                  <linearGradient id="pinGradR" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="50%" stop-color="#ff4757"/>
+                    <stop offset="100%" stop-color="#b30012"/>
+                  </linearGradient>
+                </defs>
+                <path fill="url(#pinGradR)" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/>
+              </svg>
+            </div>
+            <span>Rangpura, 40 Feet St, Sialkot, Pakistan</span>
+          </div>
+          <a href="https://www.linkedin.com/in/minteeq-ahmed-805156430" target="_blank" rel="noopener" class="contact-line">
+            <div class="icon-3d-wrapper">
+              <svg class="icon-3d-svg" viewBox="0 0 24 24" width="18" height="18">
+                <defs>
+                  <linearGradient id="liGradR" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="60%" stop-color="#38bdf8"/>
+                    <stop offset="100%" stop-color="#0284c7"/>
+                  </linearGradient>
+                </defs>
+                <path fill="url(#liGradR)" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+              </svg>
+            </div>
+            <span>LinkedIn Profile</span>
+          </a>
+          <a href="https://github.com/minteeqahmed-png" target="_blank" rel="noopener" class="contact-line">
+            <div class="icon-3d-wrapper">
+              <svg class="icon-3d-svg" viewBox="0 0 24 24" width="18" height="18">
+                <defs>
+                  <linearGradient id="ghGradR" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="50%" stop-color="#cbd5e1"/>
+                    <stop offset="100%" stop-color="#475569"/>
+                  </linearGradient>
+                </defs>
+                <path fill="url(#ghGradR)" fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+              </svg>
+            </div>
+            <span>GitHub Repositories</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="right-col">
+
+      <!-- WORK EXPERIENCE SECTION -->
+      <div class="section-block">
+        <div class="badge-section-header">WORK EXPERIENCE</div>
+        <div class="timeline-list">
+          <div class="timeline-item">
+            <div class="item-header-row">
+              <div class="item-title">CE Compliance Manager — Intern</div>
+              <div class="item-date">2026 (6 Months)</div>
+            </div>
+            <div class="item-company">Eleone (Motorbike Racing Shoes)</div>
+            <ul class="bullet-list">
+              <li>Supported CE compliance processes for motorbike racing footwear, helping ensure products met relevant EU safety and regulatory standards.</li>
+              <li>Reviewed product documentation and coordinated compliance checks as part of a structured internship program.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- TECHNICAL SKILLS SECTION -->
+      <div class="section-block">
+        <div class="badge-section-header">TECHNICAL SKILLS</div>
+        <div class="skills-category-group">
+          <div>
+            <div class="skill-cat-title">Languages</div>
+            <div class="tag-cloud" style="margin-top: 6px;">
+              <span class="tag-pill tag-pill-highlight">Python</span>
+              <span class="tag-pill tag-pill-highlight">C++</span>
+              <span class="tag-pill">TypeScript</span>
+              <span class="tag-pill">JavaScript</span>
+              <span class="tag-pill">HTML5</span>
+              <span class="tag-pill">CSS3</span>
+              <span class="tag-pill">8086 Assembly</span>
+            </div>
+          </div>
+          <div style="margin-top: 10px;">
+            <div class="skill-cat-title">Data & AI Engineering</div>
+            <div class="tag-cloud" style="margin-top: 6px;">
+              <span class="tag-pill tag-pill-highlight">RAG</span>
+              <span class="tag-pill tag-pill-highlight">Vertex AI</span>
+              <span class="tag-pill tag-pill-highlight">Prompt Design</span>
+              <span class="tag-pill">LLM Apps</span>
+              <span class="tag-pill">Scrapy</span>
+              <span class="tag-pill">BeautifulSoup</span>
+              <span class="tag-pill">RegEx</span>
+              <span class="tag-pill">Anaconda</span>
+            </div>
+          </div>
+          <div style="margin-top: 10px;">
+            <div class="skill-cat-title">Networking, Cloud & Tools</div>
+            <div class="tag-cloud" style="margin-top: 6px;">
+              <span class="tag-pill">Cisco Packet Tracer</span>
+              <span class="tag-pill">TCP/IP</span>
+              <span class="tag-pill">DHCP</span>
+              <span class="tag-pill">Supabase</span>
+              <span class="tag-pill">Vercel</span>
+              <span class="tag-pill">Git</span>
+              <span class="tag-pill">Bash</span>
+              <span class="tag-pill">PowerShell</span>
+              <span class="tag-pill">Claude Code</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECTS SECTION -->
+      <div class="section-block">
+        <div class="badge-section-header">FEATURED PROJECTS</div>
+        <div class="timeline-list">
+          <div class="timeline-item">
+            <div class="item-header-row">
+              <div class="item-title">Email Sender & Leads Finder</div>
+              <div class="item-date">2026</div>
+            </div>
+            <div class="item-desc">Built an automated workflow (Python, Web Scraping, SMTP) to extract targeted contact leads and dispatch automated email campaigns.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="item-header-row">
+              <div class="item-title">Automated Web Scraping & Data Pipeline</div>
+              <div class="item-date">2026</div>
+            </div>
+            <div class="item-desc">Developed extraction spiders (Scrapy, BeautifulSoup, RegEx) with robust error handling and pagination to produce structured CSV/JSON exports.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="item-header-row">
+              <div class="item-title">AI Business Scout</div>
+              <div class="item-date">2026</div>
+            </div>
+            <div class="item-desc">Built an AI-driven tool to research and surface business opportunities, applying generative AI and automation concepts.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="item-header-row">
+              <div class="item-title">Hybrid Wired & Wireless Network Simulation</div>
+              <div class="item-date">2026</div>
+            </div>
+            <div class="item-desc">Designed a Cisco Packet Tracer simulation (DHCP, routing, access points) across hybrid subnets, achieving reliable addressing and optimized throughput.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="item-header-row">
+              <div class="item-title">8086 Low-Level Algorithms</div>
+              <div class="item-date">2026</div>
+            </div>
+            <div class="item-desc">Wrote 16-bit Assembly programs (EMU8086) exploring CPU architecture, register management, and direct memory addressing.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CERTIFICATIONS SECTION -->
+      <div class="section-block">
+        <div class="badge-section-header">CERTIFICATIONS</div>
+        <div class="cert-grid">
+          <div class="cert-card">
+            <div class="cert-info">
+              <div class="cert-name">Generative AI Apps & Vertex AI Prompt Design</div>
+              <div class="cert-issuer">Google Cloud Security</div>
+            </div>
+            <div class="cert-badge">SEP 2026</div>
+          </div>
+          <div class="cert-card">
+            <div class="cert-info">
+              <div class="cert-name">Claude Code in Action</div>
+              <div class="cert-issuer">Anthropic</div>
+            </div>
+            <div class="cert-badge">AUG 2026</div>
+          </div>
+          <div class="cert-card">
+            <div class="cert-info">
+              <div class="cert-name">Introduction to Generative AI Learning Path</div>
+              <div class="cert-issuer">Google Cloud Security</div>
+            </div>
+            <div class="cert-badge">AUG 2026</div>
+          </div>
+          <div class="cert-card">
+            <div class="cert-info">
+              <div class="cert-name">Google AI Professional Certificate (8-Course Series)</div>
+              <div class="cert-issuer">Google</div>
+            </div>
+            <div class="cert-badge">AUG 2026</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  <script>
+    // ==========================================
+    // 🌐 3D INTERACTIVE CARD TILT ENGINE
+    // ==========================================
+    const tiltTargetsSelector = '.photo-container, .timeline-item, .cert-card, .contact-line, .edu-item';
+
+    document.querySelectorAll(tiltTargetsSelector).forEach(card => {
+      card.style.perspective = '1000px';
+      card.style.transformStyle = 'preserve-3d';
+      card.style.transition = 'transform 0.15s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.25s ease, border-color 0.25s ease';
+
+      // Create Glare Sheen Overlay
+      let glare = card.querySelector('.tilt-card-glare');
+      if (!glare) {
+        glare = document.createElement('div');
+        glare.style.position = 'absolute';
+        glare.style.inset = '0';
+        glare.style.borderRadius = 'inherit';
+        glare.style.pointerEvents = 'none';
+        glare.style.opacity = '0';
+        glare.style.transition = 'opacity 0.3s ease';
+        glare.style.mixBlendMode = 'overlay';
+        glare.style.zIndex = '6';
+        card.appendChild(glare);
+      }
+
+      const MAX_TILT = 14;
+
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+
+        const tiltX = ((0.5 - y) * MAX_TILT).toFixed(2);
+        const tiltY = ((x - 0.5) * MAX_TILT).toFixed(2);
+
+        card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.025, 1.025, 1.025) translateZ(8px)`;
+        card.style.boxShadow = `0 18px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 59, 75, 0.35)`;
+        card.style.borderColor = `rgba(255, 59, 75, 0.6)`;
+
+        glare.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(255, 255, 255, 0.3) 0%, transparent 65%)`;
+        glare.style.opacity = '1';
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1) translateZ(0px)';
+        card.style.boxShadow = '';
+        card.style.borderColor = '';
+        glare.style.opacity = '0';
+      });
+    });
+  </script>
+</body>
+</html>
